@@ -1,0 +1,93 @@
+<script>
+  (function() {
+    'use strict';
+
+    if (!document.queryCommandSupported('copy')) {
+      return;
+    }
+
+    function flashCopyMessage(el, msg) {
+      el.textContent = msg;
+      setTimeout(function() {
+        el.textContent = "Copy";
+      }, 2000);
+    }
+
+    function selectText(node) {
+      var selection = window.getSelection();
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      return selection;
+    }
+
+    function addCopyButton(containerEl) {
+      var copyBtn = document.createElement("button");
+      copyBtn.className = "highlight-copy-btn";
+      copyBtn.textContent = "Copy";
+
+      var codeEl = containerEl.firstElementChild;
+      copyBtn.addEventListener('click', function() {
+        try {
+          var selection = selectText(codeEl);
+          document.execCommand('copy');
+          selection.removeAllRanges();
+          flashCopyMessage(copyBtn, 'Copied!');
+        } catch (e) {
+          console && console.log(e);
+          flashCopyMessage(copyBtn, 'Failed :(');
+        }
+      });
+
+      containerEl.appendChild(copyBtn);
+    }
+
+    // 获取所有代码块
+    var highlightBlocks = document.getElementsByClassName('highlight');
+    Array.prototype.forEach.call(highlightBlocks, addCopyButton);
+  })();
+</script>
+
+<style>
+  /* 调整代码块父容器，使其能定位按钮 */
+  .highlight {
+    position: relative;
+  }
+
+  /* 复制按钮样式 */
+  .highlight-copy-btn {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    border: 0;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    color: #555;
+    background-color: #eee;
+    opacity: 0.6; /* 默认半透明，不抢眼 */
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+
+  /* 鼠标悬停时变清晰 */
+  .highlight-copy-btn:hover {
+    opacity: 1;
+    background-color: #ddd;
+    color: #000;
+  }
+  
+  /* 深色模式适配 (如果启用了 Dark Mode) */
+  body.dark .highlight-copy-btn {
+    background-color: #444;
+    color: #ccc;
+  }
+  body.dark .highlight-copy-btn:hover {
+    background-color: #555;
+    color: #fff;
+  }
+</style>
