@@ -4,4 +4,4 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![NeoForge](https://img.shields.io/badge/ModLoader-NeoForge-EF5A29?style=flat&logo=curseforge&logoColor=white)](https://neoforged.net/)
 
-This is a useful repo for those who are intend to mod the `Minecraft`.
+This is a useful repo for those who are intended to mod the `Minecraft`.
