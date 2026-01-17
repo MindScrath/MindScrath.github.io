@@ -16,7 +16,7 @@ layout: landing
 
 [{{< badge style="default" title="Java" value="JDK 21" >}}](https://adoptium.net/)
 
-{{<button href="/docs/setup/">}}开始学习之旅{{</button>}}
+{{<button href="/docs/">}}开始学习之旅{{</button>}}
 
 </div>
 
